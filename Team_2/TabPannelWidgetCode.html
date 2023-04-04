@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<title>My Tabpannel Widget Code</title>
+</head>
+<body>
+<div class="tab-panel">
+  <button class="tab" role="tab" aria-selected="true" aria-controls="panel-1">Tab 1</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="panel-2">Tab 2</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="panel-3">Tab 3</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="panel-4">Tab 4</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="panel-5">Tab 5</button>
+
+  <div class="tab-panel-content" role="tabpanel" id="panel-1">
+    <p>Tab 1 content goes here.</p>
+  </div>
+  <div class="tab-panel-content" role="tabpanel" id="panel-2" hidden>
+    <p>Tab 2 content goes here.</p>
+  </div>
+  <div class="tab-panel-content" role="tabpanel" id="panel-3" hidden>
+    <p>Tab 3 content goes here.</p>
+  </div>
+  <div class="tab-panel-content" role="tabpanel" id="panel-4" hidden>
+    <p>Tab 4 content goes here.</p>
+  </div>
+  <div class="tab-panel-content" role="tabpanel" id="panel-5" hidden>
+    <p>Tab 5 content goes here.</p>
+  </div>
+</div>
+<script>
+// Get all tab buttons and tab panels
+const tabButtons = document.querySelectorAll('.tab');
+const tabPanels = document.querySelectorAll('.tab-panel-content');
+
+// Add click event listener to each tab button
+tabButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    // Remove the "selected" state from all buttons and panels
+    tabButtons.forEach(button => {
+      button.setAttribute('aria-selected', 'false');
+    });
+    tabPanels.forEach(panel => {
+      panel.setAttribute('hidden', 'hidden');
+    });
+
+    // Set the "selected" state to the clicked button and panel
+    button.setAttribute('aria-selected', 'true');
+    const panelId = button.getAttribute('aria-controls');
+    const panel = document.getElementById(panelId);
+    panel.removeAttribute('hidden');
+  });
+});
+
+</script>
+</body>
+</html>
