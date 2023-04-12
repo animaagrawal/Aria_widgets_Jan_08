@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>carousel</title>
+
+<style>
+#secondSlide{
+display: none;}
+</style>
+</head>
+<body>
+<h1 id="carouselHead">Example  carousel</h1>
+<div role="region" aria-labelledby="carouselHead">
+<div id="firstSlide">
+<h2 >first slide</h2>
+<p>first slide contents</p>
+</div>
+<div id="secondSlide">
+<h2 >Second slide</h2>
+<p>second slide </p>
+</div>
+<button aria-current="true" id="firstPagButton">Slide 1 </button>
+<button id="secondPagButton">Slide 2</button>
+</div>
+<script>
+var fSlide = document.querySelector("#firstSlide");
+var sSlide = document.querySelector("#secondSlide");
+var fButton = document.querySelector("#firstPagButton");
+var sButton = document.querySelector("#secondPagButton");
+sButton.addEventListener("click", function(){
+sSlide.style.display = "block";
+sButton.ariaCurrent = "true";
+sSlide.setAttribute("aria-live", "polite");
+fSlide.style.display = "none";
+fButton.ariaCurrent = "false";
+});
+fButton.addEventListener("click", function(){
+fSlide.style.display = "block";
+fButton.ariaCurrent = "true";
+fSlide.setAttribute("aria-live", "polite");
+sSlide.style.display = "none";
+sButton.ariaCurrent = "false";
+});
+
+
+</script>
+</body>
+</html>
