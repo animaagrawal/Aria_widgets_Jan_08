@@ -1,116 +1,66 @@
 <!DOCTYPE html>
-<html lang="en"">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../css/Main.css">
-<script 
-src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<title>Accordions</title>
+<title>Accordion assignment </title>
+<style>
+.hidden{
+display: none;}
+</style>
 </head>
 <body>
 <details>
-    <summary>What is HTML?</summary>
-    <p>HTML (HyperText Markup Language) is the most basic building block of the Web. It defines the meaning and structure of web content.</p>
+<summary>What is WCAG</summary>
+<p> Web Content Accessibility Guidelines, or WCAG, is considered to be the benchmark for website accessibility. Created by the World Wide Web Consortium (W3C), </p>
 </details>
-<details>
-    <summary>What is CSS?</summary>
-    <p>Cascading Style Sheets (CSS) is a stylesheet language used to describe the presentation of a document written in HTML.</p>
-</details>
-<details>
-    <summary>What is JavaScript?</summary>
-    <p>JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.</p>
-</details>
-<div id="root">
-<main>
-<div class="topic" id="topic">
-<h1>ACCORDIONS</h1>
-<p>
-An accordion is a user interface element that allows 
-users to expand and collapse content in a web page. It is typically used to hide or show large 
-amounts of content that would otherwise clutter the page.
-</p>
+<h1>Principles of WCAG </h1>
+
+<div class="accordion-title">Perceivable
+<span aria-hidden="true" > + </span></div>
+
+<div class="hidden">
+Making content perceivable means making the output available to the user's senses, namely sight, sound, and touch (in the case of people who use Braille output devices). We won't worry about tasting or smelling web pages!
 </div>
-<div class="topic-example" id="topic-example"><h2>Example</h2>
-<div>
-<div class="accordion">
-<button class="accordion-title">
-William Shakespeare
-<span class="accordion-state" ariahidden="true">+</span>
-</button>
-<div class="accordion-pannl hidden">
-Shakespeare was a prolific writer 
-during the Elizabethan and Jacobean ages of British theatre (sometimes called the English 
-Renaissance or the Early Modern Period). Shakespeare's plays are perhaps his most enduring legacy, 
-but they are not all he wrote. Shakespeare's poems also remain popular to this day.
+
+<div  class="accordion-title">Operable 
+<span aria-hidden="true"> + </span></div>
+
+<div class="hidden">
+Making content operable means making the input mechanisms robust enough to accept a wide range of devices and methods, including keyboard, mouse, touch, gestures, single-switch devices, and so on.
 </div>
-</div>
-<div class="accordion">
-<button class="accordion-title">
-James Joyce
-<span class="accordion-state" ariahidden="true">+</span>
-</button>
-<div class="accordion-pannl hidden">
-One of the most influential and 
-innovative writers of the 20th century, James Joyce was the author of the short story collection 
-Dubliners (1914) and the novels A Portrait of the Artist as a Young Man (1916), Ulysses (1922), and 
-Finnegans Wake (1939).
-</div>
-</div>
-<div class="accordion"><button class="accordion-title">
-Charles Dickens
-<span class="accordion-state" ariahidden="true">+</span>
-</button>
-<div class="accordion-pannl hidden">
-Charles Dickens was a nineteenthcentury British author and editor who wrote novels, short stories, comics, and novellas. He produced 
-some of the most famous books of his time, including Oliver Twist, Great Expectations, A Tale of Two 
-Cities, and A Christmas Carol.
-</div>
-</div>
-</div>
-</div>
-</main>
-</div>
-<script src="../JS/Main.js"></script>
-<script src="../JS/Accordions.js"></script>
-<script src="../A11YFixing/Accordions-A11Y.js"></script>
-<script>
-function toggleAccordionState(event) {
-let accordion = event.target;
-let pannel = accordion.nextElementSibling;
-let state = accordion.querySelector("span").innerText;if (state == "+") {
-pannel.classList.remove("hidden");
+<script >
+
+function togleAccordionState (event){
+var accordion = event.target;
+var panel = accordion.nextElementSibling;
+var state = accordion.querySelector("span").innerText;
+if (state === "+"){
+panel.classList.remove("hidden"); 
 accordion.querySelector("span").innerText = "-";
 }
-else {
-pannel.classList.add("hidden");
+else{
+panel.classList.add("hidden");
 accordion.querySelector("span").innerText = "+";
 }
-}
-//Getting reference of all accordions
-let accordions = document.querySelectorAll("button.accordion-title");
-for (let i=0; i<accordions.length; i++) {
-accordions[i].addEventListener("click", toggleAccordionState);
-}
-//Accessibility Code
-function toggleaccordions_A11YAriaExpandedState(event) {
-let accordion = event.target;
-let state = accordion.getAttribute("aria-expanded");
-if (state == "true") {
+
+var expandedState = accordion.getAttribute("aria-expanded");
+if (expandedState === "true"){
 accordion.setAttribute("aria-expanded", "false");
 }
-else {accordion.setAttribute("aria-expanded", "true");
+else{
+accordion.setAttribute("aria-expanded", "true");
 }
 }
-//Getting reference of all accordions_A11Y
-let accordions_A11Y = document.querySelectorAll("button.accordion-title");
-for (let i=0; i<accordions_A11Y.length; i++) {
-accordions_A11Y[i].setAttribute("aria-expanded", "false");
+
+var accordions = document.querySelectorAll("div.accordion-title");
+for (var i = 0; i < accordions.length; i ++){
+accordions[i].setAttribute("role", "button");
+accordions[i].setAttribute("tabindex", "0");
+accordions[i].setAttribute("aria-expanded", "false");
+accordions[i].addEventListener("click", togleAccordionState);
 }
-for (let i=0; i<accordions_A11Y.length; i++) {
-accordions_A11Y[i].addEventListener("click", toggleaccordions_A11YAriaExpandedState);
-}
+
+
+
 </script>
 </body>
 </html>
