@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>toggle Buttons</title>
+<style>
+.pannel {
+display: none;
+}
+.select {
+border: 4px coral;
+color: #0074D9;
+display: block;
+}
+</style>
+</head>
+<body>
+<h1> toggle buttons </h1>
+<label for = "favnumbtn"> click to know your lucky number </label> 
+<div class = "togglebtngroup" id = "favnumbtn" role = "group">
+<div class "first">
+<label for = id = "btn1"> first button </label>
+<button id = "btn1" class = "btn">  </button>
+<div id = "panel1" class = "pannel"> 4 </div>
+</div>
+<div class "second">
+<label for = "btn2"> second button </label>
+<button id = "btn2" class = "btn">  </button>
+
+<div id = "panel2" class = "pannel"> 1 </div>
+</div>
+<div class "third">
+<label for = "btn3" > third button </label>
+<button id = "btn3" class = "btn">  </button>
+
+<div id = "panel3" class = "pannel"> 5 </div>
+</div>
+</body>
+<script>
+let buttons = document.querySelectorAll(".btn");
+for (let i = 0; i<buttons.length; i++) {
+buttons[i].addEventListener("click", toggle);
+}
+function toggle()  {
+let buttonpress = event.target;
+let clickbutton = buttonpress.nextElementSibling;
+clickbutton.classList.replace("pannel", "select");
+clickbutton.innerText = "turn on";
+clickbutton.setAttribute("aria-pressed", "true");
+let prevclickbutton = document.querySelectorAll("select");
+if (prevclickbutton.length>0) {
+prevclickbutton[0].classList.replace("select", "pannel");
+prevclickbutton[0].innerText = "turn of";
+prevclickbutton[0].setAttribute("aria-pressed", "false");
+}
+  }
+</script>
+</html>
+</html>

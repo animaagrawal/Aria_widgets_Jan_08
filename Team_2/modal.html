@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> model assignment </title>
+<style>
+.hidden {
+display: none
+}
+</style>
+<body>
+<p> <strong> modal example </strong> </p>
+<div tabindex = "0" id = "div" type = "button" role = "button"> modal example  </button>
+<div tabindex = "-1" id = "dialog" role = "dialog" aria-modal = "true" class = "hidden" >
+<div >
+<p> this is a trial modal. </p>
+<input aria-label = "add" type = "checkbox">
+<label>
+<span> dummy </span>
+<input type = "text">
+</label>
+<button id = "description"  > close  </button>
+</div>
+</div>
+<script>
+var modelbtn = document.querySelector("#div");
+modelbtn.addEventListener("click", model);
+function model(){
+document.querySelector("#dialog").classList.remove("hidden");
+}
+document.querySelector("#description").addEventListener("click", close);
+function close() {
+modelbtn.focus();
+evt.currentTarget.className += "hidden";
+}
+</script>
+</body>
+</html>
+
+
