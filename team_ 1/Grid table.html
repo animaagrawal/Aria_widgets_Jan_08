@@ -6,84 +6,121 @@
 <body>
 <div >
 <main>
-
 <h1>Courses we offer </h1>
-
-
-
 <div>
 <div class="grid" role="grid">
 <div class="grid-row" role="row">
-<div class="grid-cell" 
-role="columnheader" tabindex="0"> Sl No. </div><div class="grid-cell" 
+<div class="grid-cell" 
+role="columnheader" tabindex="0"> Sl No. </div><div class="grid-cell" 
 role="columnheader" tabindex="-1"> Course</div>
-<div class="grid-cell" 
+<div class="grid-cell" 
 role="columnheader" tabindex="-1"> Duration</div>
 </div>
 <div class="grid-row" role="row">
-<div class="grid-cell" 
+<div class="grid-cell" 
 role="gridcell"tabindex="-1"> 1</div>
-<div class="grid-cell" role="gridcell" 
+<div class="grid-cell" role="gridcell" 
 tabindex="-1"> HTML</div>
-<div class="grid-cell" role="gridcell" 
+<div class="grid-cell" role="gridcell" 
 tabindex="-1"> 2 Hours</div>
 </div>
 <div class="grid-row" role="row">
-<div class="grid-cell" 
+<div class="grid-cell" 
 role="gridcell"tabindex="-1"> 2</div>
-<div class="grid-cell" role="gridcell" 
+<div class="grid-cell" role="gridcell" 
 tabindex="-1"> CSS</div>
-<div class="grid-cell" role="gridcell" 
+<div class="grid-cell" role="gridcell" 
 tabindex="-1"> 3 Hours</div>
 </div>
-
-
+<div class="grid-row" role="row">
+<div class="grid-cell" 
+role="gridcell"tabindex="-1"> 3</div>
+<div class="grid-cell" role="gridcell" 
+tabindex="-1"> JS</div>
+<div class="grid-cell" role="gridcell" 
+tabindex="-1"> 13 Hours</div>
+</div>
 </div>
 </div>
 </main>
 </div>
 <script>
+// Select the grid element and all of its cells
 let grid = document.querySelector('.grid');
 let cells = grid.querySelectorAll('.grid-cell');
+// Set the initial index of the currently selected cell to 0
 let currentCellIndex = 0;
+// Add an event listener to the grid that listens for keydown events
 grid.addEventListener('keydown', function(e) {
-let nextCellIndex;
-if (e.keyCode === 37) { // left arrow
-let currentCellInRow = currentCellIndex % 3;
-if (currentCellInRow !== 0) {
-nextCellIndex = currentCellIndex - 1;
+    // Declare the nextCellIndex variable
+    let nextCellIndex;
+    // If the left arrow key is pressed
+    if (e.keyCode === 37) {
+        // Calculate the index of the current cell's column
+        let currentCellInRow = currentCellIndex % 3;
+
+        // If the current cell is not in the leftmost column
+        if (currentCellInRow !== 0) {
+            // Calculate the index of the next cell to the left
+            nextCellIndex = currentCellIndex - 1;
+        }
+    }
+    // If the up arrow key is pressed
+    else if (e.keyCode === 38) {
+        // Calculate the index of the current cell's row
+        let currentRowIndex = Math.floor(currentCellIndex / 3);
+
+    // Calculate the index of the next row up
+    let nextRowIndex = currentRowIndex - 1;
+    // Calculate the index of the next cell in the current row
+    let nextCellInRow = currentCellIndex % 3;
+    // If the next row up is not out of bounds
+    if (nextRowIndex >= 0) {
+        // Calculate the index of the next cell
+        nextCellIndex = (nextRowIndex * 3) + nextCellInRow;
+    }
 }
-} else if (e.keyCode === 38) { // up arrow
-let currentRowIndex = Math.floor(currentCellIndex / 3);
-let nextRowIndex = currentRowIndex - 1;
-let nextCellInRow = currentCellIndex % 3;
-if (nextRowIndex >= 0) {
-nextCellIndex = (nextRowIndex * 3) + nextCellInRow;
+// If the right arrow key is pressed
+else if (e.keyCode === 39) {
+    // Calculate the index of the current cell's column
+    let currentCellInRow = currentCellIndex % 3;
+    // If the current cell is not in the rightmost column
+    if (currentCellInRow !== 2) {
+        // Calculate the index of the next cell to the right
+        nextCellIndex = currentCellIndex + 1;
+    }
 }
-} else if (e.keyCode === 39) { // right arrow
-let currentCellInRow = currentCellIndex % 3;
-if (currentCellInRow !== 2) {
-nextCellIndex = currentCellIndex + 1;
-}} else if (e.keyCode === 40) { // down arrow
-let currentRowIndex = Math.floor(currentCellIndex / 3);
-let nextRowIndex = currentRowIndex + 1;
-let nextCellInRow = currentCellIndex % 3;
-if (nextRowIndex < 3) {
-nextCellIndex = (nextRowIndex * 3) + nextCellInRow;
+// If the down arrow key is pressed
+else if (e.keyCode === 40) {
+    // Calculate the index of the current cell's row
+        let currentRowIndex = Math.floor(currentCellIndex / 3);
+    // Calculate the index of the next row down
+    let nextRowIndex = currentRowIndex + 1;
+    // Calculate the index of the next cell in the current row
+    let nextCellInRow = currentCellIndex % 3;
+    // If the next row down is not out of bounds
+    if (nextRowIndex < 4) {
+        // Calculate the index of the next cell
+        nextCellIndex = (nextRowIndex * 3) + nextCellInRow;
+    }
 }
-}
+// If a next cell index was found
 if (nextCellIndex !== undefined) {
-e.preventDefault();
-cells[nextCellIndex].focus();
-currentCellIndex = nextCellIndex;
+    // Prevent the default behavior of the event
+    e.preventDefault();
+    // Set focus on the next cell
+    cells[nextCellIndex].focus();
+    // Update the current cell index to the next cell index
+    currentCellIndex = nextCellIndex;
 }
 });
+// Add an event listener to each cell that listens for the focus event
 cells.forEach(function(cell, index) {
+// When a cell gains focus, update the current cell index to its index
 cell.addEventListener('focus', function() {
 currentCellIndex = index;
 });
 });
- 
 </script>
 </body>
 </html>
